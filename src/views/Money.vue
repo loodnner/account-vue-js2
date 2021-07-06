@@ -4,7 +4,8 @@
       <!-- numpad传了一个submit事件出来，只需要监听ta即可 -->
       <NumberPad :amount.sync='record.amount' @submit="saveRecord"/>
       <Tabs :typeList='typeList' :type.sync="record.type" class-prefix="money-type"/>
-      <FormItem v-model="record.notes" 
+      <FormItem 
+      @on-change = "record.notes = $event"
       placeholder="在这里输入备注"
       filedName="备注"/>
       <Tags :selectedTags.sync='record.tags'/>
@@ -15,7 +16,6 @@
 </template>
 
 <script>
-//全局注册了是否还需要在单组件里面import drts
 import Layout from '@/components/Layout.vue';
 import Tags from '@/components/money/Tags.vue';
 import FormItem from '@/components/money/FormItem.vue';
@@ -33,11 +33,11 @@ export default {
     NumberPad
   },
   created () {
-    this.record.type = this.$route.params.type || this.record.type
+        this.record.type = this.$route.params.type || this.record.type
   },
   data(){
     return {
-            typeList:[
+               typeList:[
                       { text: '支出', type: 'consume' },
                       { text: '收入', type: 'earn' }
                       ],

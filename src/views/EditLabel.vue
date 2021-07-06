@@ -10,9 +10,15 @@
             <FormItem v-model="tag.name" 
             filedName="标签名"/>
         </div>
-        <Button @click.native="remove">
-            删除标签
+        <div class="removeTag-wrapper">
+            <!-- button宽度rem -->
+        <Button @click.native="remove" class="button">
+            删除
         </Button>
+        <Button @click.native="update" class="button">
+            保存
+        </Button>
+        </div>
     </Layout>
 </template>
 
@@ -30,8 +36,7 @@ import clone from '@/lib/clone.js'
                 tag:{}
             }
         },
-        //直接放data上和created上的差别 drts
-        //是否需要clone？这个会跟Vuex有关吗 drts
+        //需要改的值才会放到data上
         created(){
             this.tag =clone(store.findTag(this.$route.params.id))
         },
@@ -44,6 +49,8 @@ import clone from '@/lib/clone.js'
             update(){
                 if(this.tag.name){
                     store.updateTag(this.tag.id,this.tag.name)
+                }else{
+                    window.alert('标签名不能为空')
                 }
             },
             remove(){
@@ -61,6 +68,7 @@ import clone from '@/lib/clone.js'
 </script>
 
 <style lang="scss" scoped>
+
 .navBar{
     font-size:16px;
     padding:12px 16px;
@@ -80,6 +88,17 @@ import clone from '@/lib/clone.js'
 .formWrapper{
   background-color:#fff;
   margin-top: 8px;
+}
+
+.removeTag-wrapper{
+    display: flex;
+    // text-align: center;
+    padding:16px;
+    margin-top:44-16px;
+    justify-content: space-evenly;
+    .button{
+        width:100px
+    }
 }
 
 </style>

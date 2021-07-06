@@ -3,7 +3,7 @@
         <Tabs class-prefix='type' :typeList=typeList :type.sync=type>
         </Tabs>
             <ol v-if="groupedList.length>0">
-                <!-- 这一块主要难点是梳理sta页面的数据结构应该是啥样的 -->
+                <!-- 梳理sta页面的数据结构应该是啥样的 -->
                     <li v-for="(group,index) in groupedList" :key="index">
                         <h3 class="title">{{beautify(group.title)}}
                             <span>￥{{group.total}}</span>
@@ -45,7 +45,7 @@ import clone from '@/lib/clone'
             groupedList () {
                 // 整理出一个符合页面展示结构的数据结构，并且排好序
             const newList = clone(this.recordList)
-                .filter(m => (m.type === this.type))
+                .filter(m => (m.type === this.type)) //数据根据页面要求来筛选
                 .sort((a, b) => (dayjs(b.createDate).valueOf() - dayjs(a.createDate).valueOf()))
             if (newList.length === 0) { return [] }
             const currentDate = newList[0].createDate

@@ -17,7 +17,6 @@ Vue.component('Layout',Layout)
 Vue.component('Button',Button)
 Vue.component('Icon',Icon)
 
-//全局注册了，还需要引入吗？不需要了
 
 
 new Vue({

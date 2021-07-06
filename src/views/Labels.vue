@@ -17,7 +17,6 @@
 </template>
 
 <script>
-//drts 急需自动import
 import Icon from '@/components/Icon.vue'
 import Button from '@/components/Button.vue'
 import store from '@/store/index.js'
@@ -64,6 +63,11 @@ import store from '@/store/index.js'
          height: 18px;
          margin-right: 16px;
      }
+}
+.createTag-wrapper{
+         text-align: center;
+         padding:16px;
+         margin-top:44-16px;
 }
 
 

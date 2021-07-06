@@ -2,7 +2,7 @@
     <div>
         <label class="FormItem">
             <span class="name">{{filedName}}</span>
-            <input :value="value" @input="$emit('input',$event.target.value)"
+            <input :value="value" @input="$emit('on-change',$event.target.value)"
             :placeholder="placeholder">
         </label>
 

@@ -7,7 +7,6 @@ const recordStore = {
     recordList:JSON.parse(window.localStorage.getItem(localStorageKeyName)||'[]'),
     createRecords(record){
         //record是个引用类型，传的是地址，不复制一份，后面的改了也会影响前面的。
-        //第二个record没改掉第一个呢 drts
         const record2 = clone(record)
         record2.createDate = new Date().toISOString()
         this.recordList.push(record2)
