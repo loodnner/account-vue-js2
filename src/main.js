@@ -6,6 +6,7 @@ import Nav from '@/components/Nav.vue'
 import Layout from '@/components/Layout.vue'
 import Button from '@/components/Button.vue'
 import Icon from '@/components/Icon.vue'
+import store from './store'
 
 
 
@@ -21,5 +22,6 @@ Vue.component('Icon',Icon)
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

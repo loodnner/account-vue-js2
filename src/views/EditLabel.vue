@@ -7,7 +7,9 @@
             <span class="rightIcon"></span>
         </div>
         <div class="formWrapper">
-            <FormItem v-model="tag.name" 
+            <FormItem 
+            :value = 'tag.name'
+      @on-change = "tag.name = $event"
             filedName="标签名"/>
         </div>
         <div class="removeTag-wrapper">
@@ -24,13 +26,13 @@
 
 <script>
 import FormItem from '@/components/money/FormItem.vue'
-import store from '@/store/index.js'
 import clone from '@/lib/clone.js'
 
     export default {
         components:{
             FormItem
         },
+        
         data(){
             return {
                 tag:{}
@@ -38,32 +40,38 @@ import clone from '@/lib/clone.js'
         },
         //需要改的值才会放到data上
         created(){
-            this.tag =clone(store.findTag(this.$route.params.id))
+            const id = this.$route.params.id
+            const tag = this.$store.getters.currentTag(id)
+            this.tag = clone(tag)
         },
         methods:{
+            
             goBack(){
-                this.update()
                 this.$router.back()
                 //回退到上一个页面
             },
             update(){
-                if(this.tag.name){
-                    store.updateTag(this.tag.id,this.tag.name)
+                if(this.tag.name){ //判断是否为空
+                    // 判断是否与已有标签名重复
+                    const names = this.$store.state.tagList.map(item=>item.name)
+                    if(names.indexOf(this.tag.name)>=0){
+                        window.alert('标签名重复啦')}
+                    else{
+                    this.$store.commit('updateTag',{id:this.tag.id,name:this.tag.name})
+                        this.$router.back()
+                    }
                 }else{
                     window.alert('标签名不能为空')
                 }
             },
             remove(){
                 if (this.tag) {
-                if (store.removeTag(this.tag.id)) {
+                    this.$store.commit('removeTag',this.tag.id)
                     this.$router.back()
-                 } else {
-                    window.alert('删除失败')
-                }
+                 }
             }
              
         }
-    }
     }
 </script>
 

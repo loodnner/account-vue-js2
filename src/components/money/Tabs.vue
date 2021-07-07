@@ -4,7 +4,7 @@
             @click="select(item)"
             :class="{selected:item.type===type,[classPrefix+'-tabs-item']:classPrefix}"
         >{{item.text}}</li>
-        <!-- type是应该被选中的那个值，如果item与之相等，那就说明确实是selected了 drts -->
+        <!-- type是应该被选中的那个值，如果item与之相等，那就说明确实是selected了 -->
     </ul>
 </template>
 

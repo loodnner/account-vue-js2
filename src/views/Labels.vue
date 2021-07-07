@@ -19,28 +19,23 @@
 <script>
 import Icon from '@/components/Icon.vue'
 import Button from '@/components/Button.vue'
-import store from '@/store/index.js'
+import tagHelper from '@/mixins/tagHelper.js'
 
     export default {
         components:{
             Icon,
             Button
         },
-        data(){
-            return{
-                tagList:store.tagList
+        mixins:[tagHelper],
+        computed:{
+            tagList(){
+                return this.$store.state.tagList
             }
         },
-        methods:{
-            createTag(){
-                const name = window.prompt('请输入标签名')
-                if (!name) {
-                    return window.alert('标签名不能为空')
-                } else {
-                    store.createTag(name)
-                }
-            }
-        }
+        beforeCreate(){
+            this.$store.commit('fetchTags') //应该重复fetch才对
+        },
+        
     }
 </script>
 

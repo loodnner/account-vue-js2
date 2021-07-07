@@ -65,7 +65,6 @@
                     this.$emit('update:amount',outputNum)
                     this.$emit('submit')     
                     this.output='0'               
-                    //todo 涉及到数据传递
                 }
             }
         }

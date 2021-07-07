@@ -1,7 +1,7 @@
 <template>
     <div class="tags">
         <div class="new">
-            <button @click="create">新增标签</button>
+            <button @click="createTag">新增标签</button>
         </div>
         <ul class="current">
             <li v-for="tag in tagList" :key="tag.id" @click="toggle(tag)"
@@ -15,23 +15,25 @@
 </template>
 
 <script>
-import store from '@/store/index.js'
+import tagHelper from '@/mixins/tagHelper.js'
+
     export default {
         data(){
             return{
                 selectedTags:[],
-                tagList:store.tagList
             }
         },
+        computed:{
+           tagList(){
+               return this.$store.state.tagList
+           }
+        },
+        mixins:[tagHelper],
+        created(){
+            this.$store.commit('fetchTags')
+
+        },
         methods:{
-            create(){
-                const name = window.prompt('请输入标签名')
-                if (!name) {
-                    return window.alert('标签名不能为空')
-                } else {
-                    store.createTag(name)
-                }
-            },
             toggle(tag){
                 //rts rtd 不管view是啥样，都是数据的抽象
                 const index = this.selectedTags.indexOf(tag)

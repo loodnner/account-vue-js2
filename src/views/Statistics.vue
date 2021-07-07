@@ -23,7 +23,6 @@
 
 <script>
 import Tabs from '@/components/money/Tabs.vue'
-import store from '@/store/index.js'
 import dayjs from 'dayjs'
 import clone from '@/lib/clone'
 
@@ -38,10 +37,12 @@ import clone from '@/lib/clone'
                       { text: '收入', type: 'earn' }
                       ],
                 type:'consume',
-                recordList:store.recordList
             }
-        },
+        },    
         computed:{
+            recordList(){
+                return this.$store.state.recordList
+            },
             groupedList () {
                 // 整理出一个符合页面展示结构的数据结构，并且排好序
             const newList = clone(this.recordList)
