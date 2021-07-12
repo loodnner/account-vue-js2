@@ -40,7 +40,7 @@ Vue.use(Vuex); //store绑定到Vue原型
         store.commit('saveTag')
     }
   ,
-    removeTag(state,id){
+  removeTag(state,id){
       const index = state.tagList.findIndex(item=>item.id===id)
         state.tagList.splice(index,1)
         store.commit('saveTag')
